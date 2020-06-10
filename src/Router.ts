@@ -26,7 +26,7 @@ export class Router extends Observable {
     if(name in this.routes) {
       this.currentRoute = name;
       window.history.pushState({page: name}, name, `/${name}`);
-      this.updateSubscribers();
+      this.updateSubscribers(name);
     } else {
       throw new Error(`Route ${name} not registered`);
     }

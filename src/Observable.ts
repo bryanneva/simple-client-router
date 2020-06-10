@@ -18,7 +18,7 @@ export class Observable {
   unsubscribe(subscription: Subscription) {
   }
 
-  updateSubscribers() {
-    this.subscribers.forEach(subscriber => subscriber.update());
+  updateSubscribers(value?: any) {
+    this.subscribers.forEach(subscriber => subscriber.update(value));
   }
 }

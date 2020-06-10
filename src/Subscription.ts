@@ -1,6 +1,6 @@
 import {Observable} from "./Observable";
 
-export type Subscriber = () => void;
+export type Subscriber = (value?: any) => void;
 
 export class Subscription {
   constructor(
@@ -13,7 +13,7 @@ export class Subscription {
     this.observable.unsubscribe(this);
   }
 
-  update() {
-    this.subscriber()
+  update(value?: any) {
+    this.subscriber(value);
   }
 }
