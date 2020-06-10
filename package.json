@@ -1,6 +1,6 @@
 {
-  "name": "spa-router",
-  "version": "0.1.0",
+  "name": "simple-client-router",
+  "version": "0.2.0",
   "description": "Simple frontend router for single page applications",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
