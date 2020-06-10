@@ -5,5 +5,5 @@ export declare class Observable {
     subscribe(subscriber: Subscriber): Subscription;
     getSubscribers(): Subscription[];
     unsubscribe(subscription: Subscription): void;
-    updateSubscribers(): void;
+    updateSubscribers(value?: any): void;
 }

@@ -5,15 +5,27 @@ export interface Route {
   readonly name: string
 }
 
-export class Router extends Observable {
-  readonly routes: { [name: string]: Route } = {}
+export interface RouteRegistry {
+  [name: string]: Route
+}
 
-  constructor(private currentRoute?: string) {
+interface RouterConfig {
+  currentRoute?: string
+  routes?: RouteRegistry
+}
+
+export class Router extends Observable {
+  private currentRoute: string;
+  readonly routes: RouteRegistry;
+
+  constructor(config: Partial<RouterConfig> = {}) {
     super();
+    this.currentRoute = config.currentRoute || '';
+    this.routes = config.routes || {};
   }
 
   getCurrentPath(): string {
-    return this.currentRoute || '';
+    return this.currentRoute;
   }
 
   register(name: string, matcher: string): Route {
@@ -23,7 +35,7 @@ export class Router extends Observable {
   }
 
   goTo(name: string): void {
-    if(name in this.routes) {
+    if (name in this.routes) {
       this.currentRoute = name;
       window.history.pushState({page: name}, name, `/${name}`);
       this.updateSubscribers(name);

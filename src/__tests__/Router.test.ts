@@ -1,6 +1,31 @@
-import {Router} from "../Router";
+import {Router, RouteRegistry} from "../Router";
 
 describe('Router', () => {
+
+  describe('constructor config', () => {
+    test('routes', () => {
+      const routes: RouteRegistry = {
+        'foo': {matcher: '/foo', name: 'foo'},
+        'bar': {matcher: '/bar', name: 'bar'},
+      }
+
+      const router = new Router({routes});
+      expect(router.routes['foo']).toBeTruthy();
+    });
+
+    test('currentRoute', () => {
+      const router = new Router({currentRoute: 'foo'});
+      const currentPath = router.getCurrentPath()
+      expect(currentPath).toEqual('foo');
+    });
+  });
+
+  test('register', () => {
+    const router = new Router();
+    const route = router.register('foo', '/foo');
+    expect(router.routes['foo']).toEqual(route);
+  });
+
   describe('goTo', () => {
     test('registered route', () => {
       const spy = jest.fn();
@@ -23,17 +48,5 @@ describe('Router', () => {
       expect(spy).not.toHaveBeenCalled();
       expect(router.updateSubscribers).not.toHaveBeenCalled();
     });
-  });
-
-  test('getCurrentPath', () => {
-    const router = new Router('foo');
-    const currentPath = router.getCurrentPath()
-    expect(currentPath).toEqual('foo');
-  });
-
-  test('register', () => {
-    const router = new Router();
-    const route = router.register('foo', '/foo');
-    expect(router.routes['foo']).toEqual(route);
   });
 });
