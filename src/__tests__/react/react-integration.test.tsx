@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {useState} from 'react';
-import {Router} from "../index";
+import {Router} from "../../index";
 import {fireEvent, render} from "@testing-library/react";
+import {useState} from "react";
 
 function MockRouterComponent({router}: { router: Router }) {
   const [currentRoute, setCurrentRoute] = useState<string>(router.getCurrentPath());
@@ -26,7 +26,7 @@ function MockRouterComponent({router}: { router: Router }) {
 describe('React Integration', () => {
   it('integrates with useState', () => {
     const router = new Router();
-    router.register('a', '/a');
+    router.register('a',  '/a');
     router.register('b', '/b');
     const {getByText} = render(<MockRouterComponent router={router}/>);
 
